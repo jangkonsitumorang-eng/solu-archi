@@ -1,0 +1,1059 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Penerapan Hukum Archimedes pada Solu</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome CDN for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Plus Jakarta Sans & Playfair Display -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,800;1,400&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #0f172a;
+            color: #f8fafc;
+            overflow-x: hidden;
+        }
+        .font-serif-title {
+            font-family: 'Playfair Display', serif;
+        }
+        .gorga-pattern {
+            background-color: #0f172a;
+            background-image: radial-gradient(#38bdf8 0.75px, transparent 0.75px), radial-gradient(#38bdf8 0.75px, #0f172a 0.75px);
+            background-size: 30px 30px;
+            background-position: 0 0,15px 15px;
+            opacity: 0.15;
+        }
+        .glass-card {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .glass-card-hover {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .glass-card-hover:hover {
+            transform: translateY(-4px);
+            border-color: rgba(56, 189, 248, 0.4);
+            box-shadow: 0 12px 24px -10px rgba(56, 189, 248, 0.2);
+        }
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0f172a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #334155;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #0284c7;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between relative selection:bg-cyan-500 selection:text-white">
+
+    <!-- Background Decoration -->
+    <div class="fixed inset-0 pointer-events-none z-0">
+        <div class="absolute inset-0 gorga-pattern"></div>
+        <div class="absolute top-[-10%] left-[-10%] w-[40vw] h-[40vw] bg-cyan-600/20 rounded-full blur-[120px]"></div>
+        <div class="absolute bottom-[-10%] right-[-10%] w-[40vw] h-[40vw] bg-blue-700/20 rounded-full blur-[120px]"></div>
+    </div>
+
+    <!-- Header Banner -->
+    <header class="relative z-10 w-full border-b border-slate-800 bg-slate-900/80 backdrop-blur-md px-4 py-3 sticky top-0">
+        <div class="max-w-6xl mx-auto flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-cyan-500 to-blue-600 flex items-center justify-center text-white font-bold text-xl shadow-lg shadow-cyan-500/30">
+                    <i class="fa-solid fa-ship text-lg"></i>
+                </div>
+                <div>
+                    <h1 class="text-lg font-bold text-white leading-tight">Solu Archimedes</h1>
+                    <p class="text-xs text-cyan-400 font-medium">Fisika Solu Kecil & Danau Toba</p>
+                </div>
+            </div>
+
+            <!-- Stepper Indicators -->
+            <div class="hidden sm:flex items-center space-x-2 text-xs font-semibold">
+                <div id="step-nav-1" class="flex items-center space-x-2 text-cyan-400">
+                    <span class="w-6 h-6 rounded-full bg-cyan-500/20 border border-cyan-400 flex items-center justify-center">1</span>
+                    <span>Anggota & Nama</span>
+                </div>
+                <i class="fa-solid fa-chevron-right text-slate-600 text-xs"></i>
+                <div id="step-nav-2" class="flex items-center space-x-2 text-slate-500">
+                    <span class="w-6 h-6 rounded-full bg-slate-800 border border-slate-700 flex items-center justify-center">2</span>
+                    <span>Teori Dasar</span>
+                </div>
+                <i class="fa-solid fa-chevron-right text-slate-600 text-xs"></i>
+                <div id="step-nav-3" class="flex items-center space-x-2 text-slate-500">
+                    <span class="w-6 h-6 rounded-full bg-slate-800 border border-slate-700 flex items-center justify-center">3</span>
+                    <span>Simulasi Interaktif</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="relative z-10 flex-grow max-w-6xl w-full mx-auto p-4 md:p-6 my-auto">
+
+        <!-- ================= PAGE 1: ANGGOTA KELOMPOK & INPUT NAMA ================= -->
+        <section id="page-welcome" class="space-y-8 animate-fade-in">
+            <div class="text-center max-w-2xl mx-auto space-y-3">
+                <span class="inline-block px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 text-xs font-semibold tracking-wide uppercase">
+                    Praktikum Fisika Interaktif
+                </span>
+                <h2 class="text-3xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-white via-slate-100 to-cyan-300 font-serif-title leading-tight">
+                    Penerapan Hukum Archimedes Pada Solu
+                </h2>
+                <p class="text-slate-400 text-sm md:text-base leading-relaxed">
+                    Solu kecil secara tradisional berkapasitas <strong>1 hingga 2 orang</strong>. Dalam simulasi ini, Anda dapat menguji jumlah penumpang hingga <strong>8 orang</strong> untuk melihat batas ketahanan gaya apung Hukum Archimedes dan kapan Solu akan tenggelam!
+                </p>
+            </div>
+
+            <!-- Team Members Card -->
+            <div class="glass-card rounded-2xl p-6 md:p-8 max-w-4xl mx-auto relative overflow-hidden shadow-2xl">
+                <div class="absolute top-0 right-0 w-32 h-32 bg-cyan-500/10 rounded-full blur-2xl pointer-events-none"></div>
+                
+                <div class="flex items-center justify-between mb-6 border-b border-slate-700/60 pb-4">
+                    <div class="flex items-center space-x-3">
+                        <div class="p-2 rounded-lg bg-cyan-500/20 text-cyan-400">
+                            <i class="fa-solid fa-users text-lg"></i>
+                        </div>
+                        <h3 class="text-lg md:text-xl font-bold text-white">Anggota Kelompok Penyusun</h3>
+                    </div>
+                    <span class="text-xs text-slate-400 font-mono">5 Anggota</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <!-- Member 1 -->
+                    <div class="glass-card glass-card-hover p-4 rounded-xl flex items-center space-x-3 border border-slate-800">
+                        <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-cyan-500 to-blue-500 flex items-center justify-center font-bold text-white text-sm shadow">
+                            DK
+                        </div>
+                        <div class="overflow-hidden">
+                            <p class="text-xs text-slate-400 font-mono">4252121039</p>
+                            <h4 class="text-sm font-semibold text-slate-100 truncate">Dinda Karisa Putri Siagian</h4>
+                        </div>
+                    </div>
+
+                    <!-- Member 2 -->
+                    <div class="glass-card glass-card-hover p-4 rounded-xl flex items-center space-x-3 border border-slate-800">
+                        <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-blue-500 to-indigo-500 flex items-center justify-center font-bold text-white text-sm shadow">
+                            IM
+                        </div>
+                        <div class="overflow-hidden">
+                            <p class="text-xs text-slate-400 font-mono">4253121032</p>
+                            <h4 class="text-sm font-semibold text-slate-100 truncate">Imelda Marbun</h4>
+                        </div>
+                    </div>
+
+                    <!-- Member 3 -->
+                    <div class="glass-card glass-card-hover p-4 rounded-xl flex items-center space-x-3 border border-slate-800">
+                        <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-indigo-500 to-purple-500 flex items-center justify-center font-bold text-white text-sm shadow">
+                            JM
+                        </div>
+                        <div class="overflow-hidden">
+                            <p class="text-xs text-slate-400 font-mono">4252121013</p>
+                            <h4 class="text-sm font-semibold text-slate-100 truncate">Jangkon Mbue Situmorang</h4>
+                        </div>
+                    </div>
+
+                    <!-- Member 4 -->
+                    <div class="glass-card glass-card-hover p-4 rounded-xl flex items-center space-x-3 border border-slate-800">
+                        <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-teal-500 to-emerald-500 flex items-center justify-center font-bold text-white text-sm shadow">
+                            NR
+                        </div>
+                        <div class="overflow-hidden">
+                            <p class="text-xs text-slate-400 font-mono">4252121020</p>
+                            <h4 class="text-sm font-semibold text-slate-100 truncate">Novita Risqi Zai</h4>
+                        </div>
+                    </div>
+
+                    <!-- Member 5 -->
+                    <div class="glass-card glass-card-hover p-4 rounded-xl flex items-center space-x-3 border border-slate-800 md:col-span-2 lg:col-span-1">
+                        <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-amber-500 to-rose-500 flex items-center justify-center font-bold text-white text-sm shadow">
+                            RB
+                        </div>
+                        <div class="overflow-hidden">
+                            <p class="text-xs text-slate-400 font-mono">4253321001</p>
+                            <h4 class="text-sm font-semibold text-slate-100 truncate">Rista Bulan Purnama Simbolon</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Name Input Form Card -->
+            <div class="glass-card rounded-2xl p-6 md:p-8 max-w-xl mx-auto border border-cyan-500/30 shadow-xl text-center space-y-6">
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-2">Siap Dimulai? Masukkan Nama Anda</h3>
+                    <p class="text-slate-400 text-xs md:text-sm">
+                        Ketik nama Anda di bawah ini untuk memulai pembelajaran fisika interaktif ini.
+                    </p>
+                </div>
+
+                <div class="space-y-4">
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-slate-400">
+                            <i class="fa-solid fa-user text-cyan-400"></i>
+                        </div>
+                        <input type="text" id="user-name-input" placeholder="Masukkan nama lengkap / panggilan..." 
+                            class="w-full pl-11 pr-4 py-3.5 bg-slate-900/90 border border-slate-700 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all shadow-inner text-sm md:text-base">
+                    </div>
+                    <div id="name-error-msg" class="hidden text-rose-400 text-xs font-medium text-left flex items-center space-x-1">
+                        <i class="fa-solid fa-circle-exclamation"></i>
+                        <span>Silakan masukkan nama Anda terlebih dahulu!</span>
+                    </div>
+
+                    <button id="btn-start" onclick="goToTheory()" 
+                        class="w-full py-3.5 px-6 rounded-xl bg-gradient-to-r from-cyan-500 via-blue-600 to-cyan-500 hover:from-cyan-400 hover:to-blue-500 text-white font-bold shadow-lg shadow-cyan-500/25 hover:shadow-cyan-500/40 transform active:scale-[0.98] transition-all flex items-center justify-center space-x-2 text-base">
+                        <span>Lanjutkan</span>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= PAGE 2: TEORI DASAR ================= -->
+        <section id="page-theory" class="hidden space-y-8 animate-fade-in">
+            <!-- Dynamic User Greeting -->
+            <div class="glass-card rounded-2xl p-6 md:p-8 border border-cyan-500/30 relative overflow-hidden">
+                <div class="absolute -right-10 -bottom-10 w-48 h-48 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none"></div>
+                <div class="space-y-3">
+                    <span class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 text-xs font-semibold">
+                        <i class="fa-solid fa-lightbulb"></i>
+                        <span>Teori Dasar Fisika</span>
+                    </span>
+                    <h2 class="text-3xl md:text-4xl font-extrabold text-white font-serif-title">
+                        Hai <span id="greeting-name" class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-400">Teman</span>, Apa Itu Solu Kecil?
+                    </h2>
+                    <p class="text-slate-300 text-sm md:text-base leading-relaxed max-w-3xl">
+                        Mari kita pelajari rahasia sains di balik perahu kayu tradisional <strong>Solu</strong> dan bagaimana prinsip gaya apung Hukum Archimedes berlaku padanya saat dinaiki 1 atau 2 orang penyeberang.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Grid of Concepts -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Concept 1: Pengertian Solu -->
+                <div class="glass-card rounded-2xl p-6 border border-slate-800 space-y-4">
+                    <div class="w-12 h-12 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center text-xl font-bold">
+                        <i class="fa-solid fa-water font-bold"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white">1. Pengertian Solu Kecil</h3>
+                    <p class="text-slate-300 text-sm leading-relaxed">
+                        <strong>Solu</strong> adalah perahu kayu tradisional khas suku Batak di Danau Toba yang dibuat dengan pengerokan satu batang kayu utuh (dugout canoe). Jenis <strong>Solu kecil</strong> secara alami dirancang memiliki kapasitas maksimal <strong>2 orang penumpang</strong> untuk mobilitas cepat atau menangkap ikan.
+                    </p>
+                    <p class="text-slate-400 text-xs leading-relaxed">
+                        Karena ukuran lambungnya yang terbatas, penambahan beban melebihi 2 orang dewasa akan sangat mempengaruhi kedalaman benam perahu.
+                    </p>
+                </div>
+
+                <!-- Concept 2: Hukum Archimedes -->
+                <div class="glass-card rounded-2xl p-6 border border-slate-800 space-y-4">
+                    <div class="w-12 h-12 rounded-xl bg-cyan-500/20 text-cyan-400 flex items-center justify-center text-xl font-bold">
+                        <i class="fa-solid fa-scale-balanced"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white">2. Hukum Archimedes</h3>
+                    <p class="text-slate-300 text-sm leading-relaxed">
+                        Bunyi Hukum Archimedes: <em>"Suatu benda yang dicelupkan sebagian atau seluruhnya ke dalam zat cair akan mengalami gaya ke atas (<i>F</i><sub>A</sub>) yang besarnya sama dengan berat zat cair yang dipindahkan oleh benda tersebut."</em>
+                    </p>
+                    <div class="bg-slate-900/80 p-4 rounded-xl border border-slate-800 font-mono text-xs text-cyan-300 space-y-1">
+                        <div class="text-slate-400 text-[10px] uppercase font-sans">Rumus Dasar Gaya Apung:</div>
+                        <p class="text-sm font-bold font-serif italic tracking-wide"><i>F</i><sub>A</sub> = &rho;<sub>air</sub> &times; <i>V</i><sub>tercelup</sub> &times; <i>g</i></p>
+                        <div class="text-slate-400 text-[11px] mt-2 space-y-0.5 font-sans">
+                            <p>&bull; <strong><i>F</i><sub>A</sub></strong> = Gaya Apung ke Atas (Newton)</p>
+                            <p>&bull; <strong>&rho;<sub>air</sub></strong> = Massa jenis air Danau Toba (&plusmn; 1000 kg/m&sup3;)</p>
+                            <p>&bull; <strong><i>V</i><sub>tercelup</sub></strong> = Volume lambung Solu yang terbenam (m&sup3;)</p>
+                            <p>&bull; <strong><i>g</i></strong> = Percepatan gravitasi (&plusmn; 9.8 m/s&sup2;)</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Concept 3: Keseimbangan Gaya pada Solu -->
+                <div class="glass-card rounded-2xl p-6 border border-slate-800 space-y-4 md:col-span-2">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-12 h-12 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-xl font-bold">
+                            <i class="fa-solid fa-anchor"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-bold text-white">3. Hubungan Solu Kecil dengan Hukum Archimedes</h3>
+                            <p class="text-xs text-slate-400">Bagaimana Solu dapat Terapung, Berada di Ambang Batas, atau Tenggelam?</p>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2">
+                        <!-- Terapung -->
+                        <div class="p-4 rounded-xl bg-slate-900/60 border border-emerald-500/30 space-y-2">
+                            <div class="flex items-center space-x-2 text-emerald-400 font-bold text-sm">
+                                <i class="fa-solid fa-circle-check"></i>
+                                <span>Terapung (1 Orang / Ringan)</span>
+                            </div>
+                            <p class="text-xs text-slate-300 leading-relaxed">
+                                Gaya Berat Total <i>W</i><sub>total</sub> = (<i>m</i><sub>solu</sub> + <i>m</i><sub>orang 1</sub>) &times; <i>g</i> lebih kecil dari Gaya Apung Maksimum. Solu terbenam sebagian secara stabil dan aman.
+                            </p>
+                        </div>
+
+                        <!-- Ambang Batas -->
+                        <div class="p-4 rounded-xl bg-slate-900/60 border border-amber-500/30 space-y-2">
+                            <div class="flex items-center space-x-2 text-amber-400 font-bold text-sm">
+                                <i class="fa-solid fa-triangle-exclamation"></i>
+                                <span>Ambang Batas (2 Orang Standar)</span>
+                            </div>
+                            <p class="text-xs text-slate-300 leading-relaxed">
+                                Saat dinaiki 2 orang dengan massa standar (misal 60 kg + 65 kg), volume Solu tercelup mendekati volume maksimum lambung (<i>V</i><sub>tercelup</sub> &approx; <i>V</i><sub>maks</sub>).
+                            </p>
+                        </div>
+
+                        <!-- Tenggelam -->
+                        <div class="p-4 rounded-xl bg-slate-900/60 border border-rose-500/30 space-y-2">
+                            <div class="flex items-center space-x-2 text-rose-400 font-bold text-sm">
+                                <i class="fa-solid fa-circle-xmark"></i>
+                                <span>Tenggelam (Beban Berlebih)</span>
+                            </div>
+                            <p class="text-xs text-slate-300 leading-relaxed">
+                                Jika 2 penumpang memiliki massa yang sangat berat sehingga <i>W</i><sub>total</sub> &gt; <i>F</i><sub>A,maks</sub>, air danau meluap masuk melampaui bibir perahu dan Solu tenggelam.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Action Button -->
+            <div class="flex justify-center pt-4">
+                <button onclick="goToSimulation()" 
+                    class="py-4 px-8 rounded-2xl bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500 hover:from-emerald-400 hover:to-cyan-400 text-white font-extrabold text-lg shadow-xl shadow-emerald-500/25 hover:shadow-emerald-500/40 transform hover:-translate-y-1 active:translate-y-0 transition-all flex items-center space-x-3">
+                    <i class="fa-solid fa-gamepad text-xl"></i>
+                    <span>Yuk Mulai Simulasinya!</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+        </section>
+
+        <!-- ================= PAGE 3: SIMULASI INTERAKTIF ================= -->
+        <section id="page-simulation" class="hidden space-y-6 animate-fade-in">
+            <!-- Simulation Header Banner -->
+            <div class="glass-card rounded-2xl p-4 md:p-6 border border-cyan-500/30 flex flex-col md:flex-row items-center justify-between gap-4">
+                <div>
+                    <div class="flex items-center space-x-2 text-cyan-400 text-xs font-bold uppercase tracking-wider mb-1">
+                        <i class="fa-solid fa-flask"></i>
+                        <span>Laboratorium Simulasi Fisika</span>
+                    </div>
+                    <h2 class="text-2xl md:text-3xl font-extrabold text-white">Simulasi Archimedes Pada Solu Kecil</h2>
+                    <p class="text-slate-400 text-xs md:text-sm">
+                        Ubah jumlah penumpang (pilihan <strong>0 s.d. 8 orang</strong>) serta variasikan massa penumpang untuk menguji batas apung!
+                    </p>
+                </div>
+                <button onclick="goToTheory()" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold border border-slate-700 flex items-center space-x-2 transition">
+                    <i class="fa-solid fa-book-open"></i>
+                    <span>Kembali ke Teori</span>
+                </button>
+            </div>
+
+            <!-- Main Simulation Layout Grid -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                <!-- Left Column: Interactive Visual Canvas (7 Cols) -->
+                <div class="lg:col-span-7 flex flex-col space-y-4">
+                    <div class="glass-card rounded-2xl p-4 border border-slate-800 relative overflow-hidden flex flex-col items-center">
+                        <div class="w-full flex items-center justify-between mb-3 px-2">
+                            <span class="text-xs font-bold text-cyan-300 flex items-center space-x-2">
+                                <i class="fa-solid fa-eye"></i>
+                                <span>Visualisasi Solu Kecil di Danau Toba</span>
+                            </span>
+                            <div id="status-badge" class="px-3 py-1 rounded-full text-xs font-extrabold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 flex items-center space-x-1.5">
+                                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                                <span id="status-text">TERAPUNG AMAN</span>
+                            </div>
+                        </div>
+
+                        <!-- Canvas Box -->
+                        <div class="relative w-full aspect-[4/3] max-h-[420px] rounded-xl overflow-hidden border border-slate-700/80 bg-slate-950 shadow-inner">
+                            <canvas id="soluCanvas" class="w-full h-full block cursor-crosshair"></canvas>
+                            
+                            <!-- Overload Overlay Visual Alert -->
+                            <div id="overload-alert" class="hidden absolute inset-0 bg-rose-900/70 backdrop-blur-xs flex flex-col items-center justify-center text-center p-6 space-y-2 animate-bounce-short">
+                                <div class="w-16 h-16 rounded-full bg-rose-600 text-white flex items-center justify-center text-3xl shadow-lg">
+                                    <i class="fa-solid fa-triangle-exclamation"></i>
+                                </div>
+                                <h3 class="text-2xl font-black text-white">SOLU TENGGELAM!</h3>
+                                <p class="text-rose-100 text-xs max-w-xs">
+                                    Massa total beban melebihi batas Gaya Apung Maksimum Solu kecil (<i>F</i><sub>A,maks</sub>). Kurangi massa penumpang agar Solu kembali terapung!
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Canvas Legend / Vectors Indicator -->
+                        <div class="w-full grid grid-cols-3 gap-2 mt-3 text-[11px] font-medium text-slate-400 text-center">
+                            <div class="flex items-center justify-center space-x-1.5 bg-slate-900/80 p-2 rounded-lg border border-slate-800">
+                                <span class="w-3 h-3 rounded-full bg-rose-500 inline-block"></span>
+                                <span>Gaya Berat (<i>W</i>) &darr;</span>
+                            </div>
+                            <div class="flex items-center justify-center space-x-1.5 bg-slate-900/80 p-2 rounded-lg border border-slate-800">
+                                <span class="w-3 h-3 rounded-full bg-cyan-400 inline-block"></span>
+                                <span>Gaya Apung (<i>F</i><sub>A</sub>) &uarr;</span>
+                            </div>
+                            <div class="flex items-center justify-center space-x-1.5 bg-slate-900/80 p-2 rounded-lg border border-slate-800">
+                                <span class="w-3 h-3 rounded-full bg-amber-400 inline-block"></span>
+                                <span>Garis Air Tercelup</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column: Control Panel & Live Physics Measurements (5 Cols) -->
+                <div class="lg:col-span-5 flex flex-col space-y-4">
+                    <!-- Controls Card -->
+                    <div class="glass-card rounded-2xl p-5 border border-slate-800 space-y-5">
+                        <h3 class="text-base font-bold text-white flex items-center space-x-2 border-b border-slate-800 pb-3">
+                            <i class="fa-solid fa-sliders text-cyan-400"></i>
+                            <span>Pengaturan Parameter Solu Kecil</span>
+                        </h3>
+
+                        <!-- Passenger Count Select (0 to 8) -->
+                        <div class="space-y-3">
+                            <div class="flex justify-between items-center">
+                                <label class="text-xs font-semibold text-slate-300">
+                                    Jumlah Penumpang (0 s.d. 8 Orang)
+                                </label>
+                                <span id="passenger-count-display" class="px-2.5 py-0.5 rounded-md bg-cyan-500/20 text-cyan-300 font-mono font-bold text-sm border border-cyan-500/30">
+                                    1 Orang
+                                </span>
+                            </div>
+                            
+                            <div class="grid grid-cols-5 sm:grid-cols-9 gap-1" id="passenger-btn-grid">
+                                <button id="btn-p0" onclick="setPassengerCount(0)" class="py-1.5 rounded-lg border font-bold text-xs transition bg-slate-800 border-slate-700 text-slate-300">0</button>
+                                <button id="btn-p1" onclick="setPassengerCount(1)" class="py-1.5 rounded-lg border font-bold text-xs transition bg-cyan-500/20 border-cyan-400 text-cyan-300">1</button>
+                                <button id="btn-p2" onclick="setPassengerCount(2)" class="py-1.5 rounded-lg border font-bold text-xs transition bg-slate-800 border-slate-700 text-slate-300">2</button>
+                                <button id="btn-p3" onclick="setPassengerCount(3)" class="py-1.5 rounded-lg border font-bold text-xs transition bg-slate-800 border-slate-700 text-slate-300">3</button>
+                                <button id="btn-p4" onclick="setPassengerCount(4)" class="py-1.5 rounded-lg border font-bold text-xs transition bg-slate-800 border-slate-700 text-slate-300">4</button>
+                                <button id="btn-p5" onclick="setPassengerCount(5)" class="py-1.5 rounded-lg border font-bold text-xs transition bg-slate-800 border-slate-700 text-slate-300">5</button>
+                                <button id="btn-p6" onclick="setPassengerCount(6)" class="py-1.5 rounded-lg border font-bold text-xs transition bg-slate-800 border-slate-700 text-slate-300">6</button>
+                                <button id="btn-p7" onclick="setPassengerCount(7)" class="py-1.5 rounded-lg border font-bold text-xs transition bg-slate-800 border-slate-700 text-slate-300">7</button>
+                                <button id="btn-p8" onclick="setPassengerCount(8)" class="py-1.5 rounded-lg border font-bold text-xs transition bg-slate-800 border-slate-700 text-slate-300">8</button>
+                            </div>
+                        </div>
+
+                        <!-- Variable Mass Sliders Container for Active Passengers -->
+                        <div id="person-mass-container" class="space-y-3 pt-3 border-t border-slate-800/80 max-h-56 overflow-y-auto pr-1">
+                            <!-- Dynamic passenger mass sliders rendered via JS -->
+                        </div>
+
+                        <!-- Solu Boat Mass Slider -->
+                        <div class="space-y-3 pt-3 border-t border-slate-800/80">
+                            <div class="flex justify-between items-center text-xs">
+                                <label class="font-semibold text-slate-300">Massa Perahu Solu (<i>m</i><sub>solu</sub>)</label>
+                                <span id="solu-mass-display" class="font-mono text-amber-300 font-bold">80 kg</span>
+                            </div>
+                            <input type="range" id="solu-mass-range" min="50" max="120" value="80" step="5" 
+                                class="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-amber-400" 
+                                oninput="updatePhysicsFromControls()">
+                        </div>
+
+                        <!-- Quick Presets -->
+                        <div class="pt-2 border-t border-slate-800/80 space-y-2">
+                            <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider block">Skenario Uji Cepat:</span>
+                            <div class="grid grid-cols-2 sm:grid-cols-4 gap-1.5">
+                                <button onclick="setPresetScenario('empty')" class="py-1.5 px-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg text-[11px] font-medium border border-slate-700 transition">
+                                    0 Orang
+                                </button>
+                                <button onclick="setPresetScenario('standard')" class="py-1.5 px-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg text-[11px] font-medium border border-slate-700 transition">
+                                    2 Orang (Aman)
+                                </button>
+                                <button onclick="setPresetScenario('heavy')" class="py-1.5 px-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg text-[11px] font-medium border border-slate-700 transition">
+                                    4 Orang (Kritis)
+                                </button>
+                                <button onclick="setPresetScenario('extreme')" class="py-1.5 px-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg text-[11px] font-medium border border-slate-700 transition">
+                                    8 Orang (Tenggelam)
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Live Physics Readout Calculations -->
+                    <div class="glass-card rounded-2xl p-5 border border-slate-800 space-y-3">
+                        <h3 class="text-base font-bold text-white flex items-center space-x-2 border-b border-slate-800 pb-3">
+                            <i class="fa-solid fa-calculator text-emerald-400"></i>
+                            <span>Kalkulasi Gaya Fisika Real-Time</span>
+                        </h3>
+
+                        <div class="grid grid-cols-2 gap-3 text-xs">
+                            <!-- Total Mass -->
+                            <div class="bg-slate-900/90 p-3 rounded-xl border border-slate-800">
+                                <span class="text-slate-400 text-[10px] block">Massa Total (<i>m</i><sub>total</sub>)</span>
+                                <span id="calc-mass" class="text-lg font-mono font-bold text-white">140 kg</span>
+                            </div>
+
+                            <!-- Total Weight -->
+                            <div class="bg-slate-900/90 p-3 rounded-xl border border-slate-800">
+                                <span class="text-slate-400 text-[10px] block">Gaya Berat (<i>W</i>)</span>
+                                <span id="calc-weight" class="text-lg font-mono font-bold text-rose-400">1,372 N</span>
+                            </div>
+
+                            <!-- Buoyant Force -->
+                            <div class="bg-slate-900/90 p-3 rounded-xl border border-slate-800">
+                                <span class="text-slate-400 text-[10px] block">Gaya Apung (<i>F</i><sub>A</sub>)</span>
+                                <span id="calc-buoyancy" class="text-lg font-mono font-bold text-cyan-400">1,372 N</span>
+                            </div>
+
+                            <!-- Submerged Volume -->
+                            <div class="bg-slate-900/90 p-3 rounded-xl border border-slate-800">
+                                <span class="text-slate-400 text-[10px] block">Volume Tercelup (<i>V</i><sub>tercelup</sub>)</span>
+                                <span id="calc-volume" class="text-lg font-mono font-bold text-amber-300">0.140 m&sup3;</span>
+                            </div>
+                        </div>
+
+                        <!-- Progress Bar for Submerged Depth -->
+                        <div class="pt-2 space-y-1.5">
+                            <div class="flex justify-between text-xs font-semibold">
+                                <span class="text-slate-400">Persentase Terbenam Lambung:</span>
+                                <span id="submerged-percent" class="text-cyan-400 font-mono">66.7%</span>
+                            </div>
+                            <div class="w-full h-3 bg-slate-900 rounded-full overflow-hidden border border-slate-800 p-0.5">
+                                <div id="submerged-bar" class="h-full bg-gradient-to-r from-emerald-500 via-amber-500 to-rose-500 rounded-full transition-all duration-300" style="width: 66.7%;"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Dynamic Pembahasan & Kesimpulan Card -->
+                    <div class="glass-card rounded-2xl p-5 border border-cyan-500/30 space-y-4 bg-slate-900/60">
+                        <div class="flex items-center space-x-2 border-b border-slate-800 pb-2">
+                            <i class="fa-solid fa-graduation-cap text-cyan-400"></i>
+                            <h3 class="text-base font-bold text-white">Pembahasan & Kesimpulan Analisis</h3>
+                        </div>
+
+                        <!-- Pembahasan -->
+                        <div class="space-y-1">
+                            <span class="text-xs font-bold text-cyan-300 uppercase tracking-wider flex items-center gap-1.5">
+                                <i class="fa-solid fa-chalkboard-user"></i> Pembahasan Singkat:
+                            </span>
+                            <p id="live-discussion" class="text-xs text-slate-300 leading-relaxed bg-slate-950/60 p-3 rounded-xl border border-slate-800/80">
+                                Loading pembahasan...
+                            </p>
+                        </div>
+
+                        <!-- Kesimpulan -->
+                        <div class="space-y-1">
+                            <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider flex items-center gap-1.5">
+                                <i class="fa-solid fa-clipboard-check"></i> Kesimpulan Singkat:
+                            </span>
+                            <div id="live-conclusion-box" class="p-3 rounded-xl border bg-emerald-950/30 border-emerald-500/30 text-xs text-emerald-200 font-medium leading-relaxed">
+                                Loading kesimpulan...
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="relative z-10 w-full border-t border-slate-800 bg-slate-900/90 py-4 px-4 text-center text-xs text-slate-500">
+        <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2">
+            <p>&copy; 2026 Kelompok Praktikum Fisika Solu Kecil - Penerapan Hukum Archimedes</p>
+            <p class="text-slate-400 font-mono">Danau Toba, Sumatera Utara</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript Simulation Engine -->
+    <script>
+        // Global State
+        let userName = "";
+        let currentStep = 1;
+
+        // Physics Constants & Small Solu Capacity Parameters
+        const gravity = 9.8; // m/s^2
+        const waterDensity = 1000; // kg/m^3 (lake water Danau Toba)
+        const maxBoatVolume = 0.210; // m^3
+
+        let passengerCount = 1; // 0 to 8
+        let pMasses = [60, 65, 70, 68, 72, 60, 65, 75]; // Masses for up to 8 passengers
+        let soluMass = 80; // kg
+
+        // Canvas Elements
+        let canvas, ctx;
+        let animationFrameId;
+        let waveOffset = 0;
+
+        window.onload = function() {
+            canvas = document.getElementById('soluCanvas');
+            if (canvas) {
+                ctx = canvas.getContext('2d');
+                resizeCanvas();
+                window.addEventListener('resize', resizeCanvas);
+            }
+        };
+
+        function resizeCanvas() {
+            if (!canvas) return;
+            const rect = canvas.getBoundingClientRect();
+            canvas.width = rect.width;
+            canvas.height = rect.height;
+        }
+
+        // Navigation Controls
+        function goToTheory() {
+            const input = document.getElementById('user-name-input');
+            const errorMsg = document.getElementById('name-error-msg');
+            
+            if (currentStep === 1) {
+                if (!input.value.trim()) {
+                    errorMsg.classList.remove('hidden');
+                    input.focus();
+                    return;
+                }
+                userName = input.value.trim();
+                errorMsg.classList.add('hidden');
+            }
+
+            document.getElementById('greeting-name').innerText = userName || "Teman";
+
+            document.getElementById('page-welcome').classList.add('hidden');
+            document.getElementById('page-theory').classList.remove('hidden');
+            document.getElementById('page-simulation').classList.add('hidden');
+
+            updateStepIndicator(2);
+            currentStep = 2;
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function goToSimulation() {
+            document.getElementById('page-welcome').classList.add('hidden');
+            document.getElementById('page-theory').classList.add('hidden');
+            document.getElementById('page-simulation').classList.remove('hidden');
+
+            updateStepIndicator(3);
+            currentStep = 3;
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            setTimeout(() => {
+                resizeCanvas();
+                renderPassengerSliders();
+                updatePhysicsFromControls();
+                if (!animationFrameId) {
+                    animateLoop();
+                }
+            }, 100);
+        }
+
+        function updateStepIndicator(step) {
+            for (let i = 1; i <= 3; i++) {
+                const el = document.getElementById(`step-nav-${i}`);
+                if (i <= step) {
+                    el.className = "flex items-center space-x-2 text-cyan-400 font-bold";
+                    el.querySelector('span:first-child').className = "w-6 h-6 rounded-full bg-cyan-500/20 border border-cyan-400 flex items-center justify-center";
+                } else {
+                    el.className = "flex items-center space-x-2 text-slate-500 font-normal";
+                    el.querySelector('span:first-child').className = "w-6 h-6 rounded-full bg-slate-800 border border-slate-700 flex items-center justify-center";
+                }
+            }
+        }
+
+        // Simulation Controls Logic
+        function setPassengerCount(count) {
+            passengerCount = count;
+            
+            // Toggle active button styling for 0..8
+            for (let i = 0; i <= 8; i++) {
+                const btn = document.getElementById(`btn-p${i}`);
+                if (btn) {
+                    if (i === count) {
+                        btn.className = "py-1.5 rounded-lg border font-bold text-xs transition bg-cyan-500/20 border-cyan-400 text-cyan-300";
+                    } else {
+                        btn.className = "py-1.5 rounded-lg border font-bold text-xs transition bg-slate-800 border-slate-700 text-slate-300";
+                    }
+                }
+            }
+
+            renderPassengerSliders();
+            updatePhysicsFromControls();
+        }
+
+        function renderPassengerSliders() {
+            const container = document.getElementById('person-mass-container');
+            if (!container) return;
+
+            if (passengerCount === 0) {
+                container.innerHTML = `<p class="text-xs text-slate-500 italic text-center py-2">Solu kosong tanpa penumpang.</p>`;
+                return;
+            }
+
+            let html = '';
+            for (let i = 0; i < passengerCount; i++) {
+                html += `
+                    <div class="space-y-1">
+                        <div class="flex justify-between items-center text-xs">
+                            <span class="font-semibold text-slate-300 flex items-center gap-1.5">
+                                <i class="fa-solid fa-user text-cyan-400 text-[10px]"></i> Penumpang ${i + 1} (<i>m</i><sub>p${i + 1}</sub>)
+                            </span>
+                            <span id="p${i + 1}-mass-display" class="font-mono text-cyan-300 font-bold">${pMasses[i]} kg</span>
+                        </div>
+                        <input type="range" id="p${i + 1}-mass-range" min="30" max="110" value="${pMasses[i]}" step="1" 
+                            class="w-full h-1.5 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-cyan-400" 
+                            oninput="onPassengerMassChange(${i}, this.value)">
+                    </div>
+                `;
+            }
+            container.innerHTML = html;
+        }
+
+        function onPassengerMassChange(index, val) {
+            pMasses[index] = parseInt(val);
+            const disp = document.getElementById(`p${index + 1}-mass-display`);
+            if (disp) disp.innerText = `${pMasses[index]} kg`;
+            updatePhysicsFromControls();
+        }
+
+        function setPresetScenario(type) {
+            if (type === 'empty') {
+                soluMass = 80;
+                document.getElementById('solu-mass-range').value = 80;
+                setPassengerCount(0);
+            } else if (type === 'standard') {
+                soluMass = 80;
+                pMasses[0] = 60;
+                pMasses[1] = 65;
+                document.getElementById('solu-mass-range').value = 80;
+                setPassengerCount(2);
+            } else if (type === 'heavy') {
+                soluMass = 80;
+                for (let i = 0; i < 4; i++) pMasses[i] = 65;
+                document.getElementById('solu-mass-range').value = 80;
+                setPassengerCount(4);
+            } else if (type === 'extreme') {
+                soluMass = 90;
+                for (let i = 0; i < 8; i++) pMasses[i] = 70;
+                document.getElementById('solu-mass-range').value = 90;
+                setPassengerCount(8);
+            }
+        }
+
+        function updatePhysicsFromControls() {
+            soluMass = parseInt(document.getElementById('solu-mass-range').value);
+
+            // Update DOM displays
+            document.getElementById('passenger-count-display').innerText = `${passengerCount} Orang`;
+            document.getElementById('solu-mass-display').innerText = `${soluMass} kg`;
+
+            // Calculate Passengers Mass
+            let passengersMass = 0;
+            for (let i = 0; i < passengerCount; i++) {
+                passengersMass += pMasses[i];
+            }
+
+            // Physics Calculations
+            const totalMass = soluMass + passengersMass; // kg
+            const weightForce = totalMass * gravity; // N
+            const submergedVolume = totalMass / waterDensity; // m^3
+            
+            // Max buoyant force of the small Solu hull
+            const maxBuoyantForce = maxBoatVolume * waterDensity * gravity;
+            const buoyantForce = Math.min(weightForce, maxBuoyantForce);
+
+            const submergedRatio = submergedVolume / maxBoatVolume;
+            const submergedPercentage = (Math.min(1.2, submergedRatio) * 100).toFixed(1);
+
+            // Update Readout UI
+            document.getElementById('calc-mass').innerText = `${totalMass} kg`;
+            document.getElementById('calc-weight').innerText = `${Math.round(weightForce).toLocaleString()} N`;
+            document.getElementById('calc-buoyancy').innerText = `${Math.round(buoyantForce).toLocaleString()} N`;
+            document.getElementById('calc-volume').innerText = `${submergedVolume.toFixed(3)} m\u00B3`;
+            
+            document.getElementById('submerged-percent').innerText = `${submergedPercentage}%`;
+            document.getElementById('submerged-bar').style.width = `${Math.min(100, submergedRatio * 100)}%`;
+
+            // Status Badge & Overload Alert
+            const badge = document.getElementById('status-badge');
+            const badgeText = document.getElementById('status-text');
+            const alertBox = document.getElementById('overload-alert');
+
+            if (submergedRatio > 0.98) {
+                badge.className = "px-3 py-1 rounded-full text-xs font-extrabold bg-rose-500/20 text-rose-400 border border-rose-500/40 flex items-center space-x-1.5 animate-pulse";
+                badgeText.innerText = "OVERLOAD / TENGGELAM!";
+                if (alertBox) alertBox.classList.remove('hidden');
+            } else if (submergedRatio > 0.85) {
+                badge.className = "px-3 py-1 rounded-full text-xs font-extrabold bg-amber-500/20 text-amber-400 border border-amber-500/40 flex items-center space-x-1.5";
+                badgeText.innerText = "HATI-HATI (AMBANG BATAS)";
+                if (alertBox) alertBox.classList.add('hidden');
+            } else {
+                badge.className = "px-3 py-1 rounded-full text-xs font-extrabold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 flex items-center space-x-1.5";
+                badgeText.innerText = "TERAPUNG AMAN";
+                if (alertBox) alertBox.classList.add('hidden');
+            }
+
+            // Generate Professional Dynamic Pembahasan & Kesimpulan
+            const discussionEl = document.getElementById('live-discussion');
+            const conclusionBox = document.getElementById('live-conclusion-box');
+
+            let discussionText = "";
+            let conclusionText = "";
+            let conclusionStyle = "";
+
+            if (submergedRatio > 0.98) {
+                discussionText = `Pada simulasi ini, Solu kecil (massa <strong>${soluMass} kg</strong>) memuat <strong>${passengerCount} orang</strong> dengan total massa penumpang <strong>${passengersMass} kg</strong> (Massa total <i>m</i><sub>total</sub> = <strong>${totalMass} kg</strong>). Hal ini menghasilkan Gaya Berat <i>W</i> sebesar <strong>${Math.round(weightForce)} N</strong>, yang telah <strong>melampaui Gaya Apung Maksimum</strong> lambung Solu (<i>F</i><sub>A,maks</sub> = ${Math.round(maxBuoyantForce)} N). Air Danau Toba meluap masuk melewati bibir perahu.`;
+                
+                conclusionText = `<strong>KESIMPULAN (TENGGELAM):</strong> Solu kecil tenggelam karena <i>W</i> &gt; <i>F</i><sub>A,maks</sub>. Beban ${passengerCount} penumpang melampaui batas volume displacement air yang mampu dipindahkan oleh perahu kecil ini.`;
+                conclusionStyle = "p-3 rounded-xl border bg-rose-950/40 border-rose-500/40 text-xs text-rose-200 font-medium leading-relaxed";
+            } else if (submergedRatio > 0.85) {
+                discussionText = `Dengan ${passengerCount} orang penumpang (${passengersMass} kg) dan massa Solu <strong>${soluMass} kg</strong>, total massa mencapai <strong>${totalMass} kg</strong>. Lambung Solu terbenam sebesar <strong>${submergedPercentage}%</strong> dari batas maksimalnya. Gaya Apung <i>F</i><sub>A</sub> (${Math.round(buoyantForce)} N) masih menyeimbangi Gaya Berat <i>W</i>, namun perahu berada pada kondisi yang sangat rawan.`;
+
+                conclusionText = `<strong>KESIMPULAN (AMBANG BATAS):</strong> Perahu berada di batas maksimum daya tampungnya (<i>V</i><sub>tercelup</sub> &approx; <i>V</i><sub>maks</sub>). Posisi perahu masih setimbang (<i>F</i><sub>A</sub> = <i>W</i>), tetapi rawan tenggelam apabila terkena riak ombak.`;
+                conclusionStyle = "p-3 rounded-xl border bg-amber-950/40 border-amber-500/40 text-xs text-amber-200 font-medium leading-relaxed";
+            } else {
+                discussionText = `Massa total Solu dan ${passengerCount} penumpang adalah <strong>${totalMass} kg</strong> (Solu: ${soluMass} kg, Penumpang: ${passengersMass} kg). Solu memindahkan air Danau Toba sebesar <strong>${submergedVolume.toFixed(3)} m&sup3;</strong>. Menurut Hukum Archimedes, air yang dipindahkan ini memberikan Gaya Apung ke atas <i>F</i><sub>A</sub> = <strong>${Math.round(buoyantForce)} N</strong> yang tepat seimbang dengan Gaya Berat <i>W</i> (<strong>${Math.round(weightForce)} N</strong>).`;
+
+                conclusionText = `<strong>KESIMPULAN (TERAPUNG AMAN):</strong> Solu terapung stabil dan aman karena <i>F</i><sub>A</sub> = <i>W</i>. Gaya ke atas dari air Danau Toba cukup kuat menopang seluruh beban.`;
+                conclusionStyle = "p-3 rounded-xl border bg-emerald-950/40 border-emerald-500/30 text-xs text-emerald-200 font-medium leading-relaxed";
+            }
+
+            if (discussionEl) discussionEl.innerHTML = discussionText;
+            if (conclusionBox) {
+                conclusionBox.innerHTML = conclusionText;
+                conclusionBox.className = conclusionStyle;
+            }
+        }
+
+        // Canvas Rendering Loop
+        function animateLoop() {
+            if (!ctx) return;
+            waveOffset += 0.04;
+
+            drawScene();
+            animationFrameId = requestAnimationFrame(animateLoop);
+        }
+
+        function drawScene() {
+            const width = canvas.width;
+            const height = canvas.height;
+
+            ctx.clearRect(0, 0, width, height);
+
+            // Sky Gradient
+            const skyGrad = ctx.createLinearGradient(0, 0, 0, height * 0.55);
+            skyGrad.addColorStop(0, '#0284c7');
+            skyGrad.addColorStop(0.7, '#38bdf8');
+            skyGrad.addColorStop(1, '#bae6fd');
+            ctx.fillStyle = skyGrad;
+            ctx.fillRect(0, 0, width, height * 0.55);
+
+            // Mountains (Pulau Samosir)
+            ctx.fillStyle = '#0f3854';
+            ctx.beginPath();
+            ctx.moveTo(0, height * 0.55);
+            ctx.lineTo(width * 0.2, height * 0.38);
+            ctx.lineTo(width * 0.45, height * 0.48);
+            ctx.lineTo(width * 0.7, height * 0.32);
+            ctx.lineTo(width, height * 0.55);
+            ctx.closePath();
+            ctx.fill();
+
+            ctx.fillStyle = '#1e4d6b';
+            ctx.beginPath();
+            ctx.moveTo(0, height * 0.55);
+            ctx.lineTo(width * 0.3, height * 0.42);
+            ctx.lineTo(width * 0.6, height * 0.52);
+            ctx.lineTo(width * 0.85, height * 0.40);
+            ctx.lineTo(width, height * 0.55);
+            ctx.closePath();
+            ctx.fill();
+
+            // Water Level Line
+            const waterLevel = height * 0.58;
+
+            // Physics calculation for accurate boat immersion
+            let passengersMass = 0;
+            for (let i = 0; i < passengerCount; i++) {
+                passengersMass += pMasses[i];
+            }
+            const totalMass = soluMass + passengersMass;
+
+            const maxMass = maxBoatVolume * waterDensity; // ~210 kg
+            const submergedRatio = totalMass / maxMass;
+
+            const bobbing = Math.sin(waveOffset * 1.5) * 2.5;
+            const hullHeight = 52; 
+
+            // Calculate boat rim vertical offset so hull immerses accurately into water
+            const submergedPixels = hullHeight * Math.min(1.15, submergedRatio);
+            const boatRimY = waterLevel - hullHeight + submergedPixels + bobbing;
+
+            const boatWidth = Math.min(width * 0.62, 320);
+            const boatX = (width - boatWidth) / 2;
+
+            ctx.save();
+            
+            // Tilt if overloaded
+            if (submergedRatio > 0.98) {
+                ctx.translate(width / 2, boatRimY + 20);
+                ctx.rotate(0.08 * Math.sin(waveOffset * 2));
+                ctx.translate(-width / 2, -(boatRimY + 20));
+            }
+
+            // 1. Draw Passengers seated properly inside Solu
+            drawPassengers(boatX, boatRimY, boatWidth, passengerCount);
+
+            // 2. Solu Hull (Traditional Batak Dugout Shape)
+            ctx.fillStyle = '#78350f';
+            ctx.strokeStyle = '#451a03';
+            ctx.lineWidth = 3;
+
+            ctx.beginPath();
+            ctx.moveTo(boatX - 22, boatRimY - 12);
+            ctx.quadraticCurveTo(boatX - 5, boatRimY + 10, boatX + 15, boatRimY + hullHeight);
+            ctx.lineTo(boatX + boatWidth - 15, boatRimY + hullHeight);
+            ctx.quadraticCurveTo(boatX + boatWidth + 5, boatRimY + 10, boatX + boatWidth + 22, boatRimY - 12);
+            ctx.quadraticCurveTo(boatX + boatWidth - 10, boatRimY + 12, boatX + boatWidth - 25, boatRimY + 8);
+            ctx.lineTo(boatX + 25, boatRimY + 8);
+            ctx.quadraticCurveTo(boatX - 10, boatRimY + 12, boatX - 22, boatRimY - 12);
+            ctx.closePath();
+            ctx.fill();
+            ctx.stroke();
+
+            // Gorga Strip
+            ctx.strokeStyle = '#f59e0b';
+            ctx.lineWidth = 2.5;
+            ctx.beginPath();
+            ctx.moveTo(boatX + 10, boatRimY + 12);
+            ctx.lineTo(boatX + boatWidth - 10, boatRimY + 12);
+            ctx.stroke();
+
+            // Force Vectors Overlay
+            drawForceVectors(width / 2, boatRimY + (hullHeight / 2), totalMass, submergedRatio);
+
+            ctx.restore();
+
+            // 3. Draw Water Layer in front for depth
+            drawAnimatedWater(width, height, waterLevel);
+        }
+
+        function drawPassengers(boatX, boatRimY, boatWidth, count) {
+            if (count === 0) return;
+
+            const padding = 22;
+            const usableWidth = boatWidth - (padding * 2);
+
+            // Scale factor based on passenger count so up to 8 people fit nicely on the boat
+            let scale = 0.85;
+            if (count > 2) scale = 0.72;
+            if (count > 5) scale = 0.58;
+
+            const shirtColors = [
+                '#0284c7', '#2563eb', '#0d9488', '#16a34a', 
+                '#ca8a04', '#ea580c', '#e11d48', '#9333ea'
+            ];
+
+            for (let i = 0; i < count; i++) {
+                let px;
+                if (count === 1) {
+                    px = boatX + boatWidth / 2;
+                } else {
+                    px = boatX + padding + (i * (usableWidth / (count - 1)));
+                }
+
+                const py = boatRimY + 8;
+                const currentP = pMasses[i] || 60;
+                
+                const pScale = scale * (0.88 + ((currentP - 40) / 100) * 0.25);
+
+                // Head
+                ctx.fillStyle = '#fde047'; 
+                ctx.beginPath();
+                ctx.arc(px, py - (22 * pScale), 7 * pScale, 0, Math.PI * 2);
+                ctx.fill();
+
+                // Hair / Top
+                ctx.fillStyle = '#1e293b';
+                ctx.beginPath();
+                ctx.arc(px, py - (24 * pScale), 7 * pScale, Math.PI, Math.PI * 2);
+                ctx.fill();
+
+                // Body
+                ctx.fillStyle = shirtColors[i % shirtColors.length];
+                ctx.beginPath();
+                ctx.roundRect(px - (6 * pScale), py - (15 * pScale), 12 * pScale, 15 * pScale, 2);
+                ctx.fill();
+
+                // Paddle for front and back passengers
+                if (i === 0 || i === count - 1) {
+                    ctx.strokeStyle = '#b45309';
+                    ctx.lineWidth = 2 * pScale;
+                    ctx.beginPath();
+                    ctx.moveTo(px + (i === 0 ? -4 : 4), py - (8 * pScale));
+                    ctx.lineTo(px + (i === 0 ? -12 : 12), py + (16 * pScale));
+                    ctx.stroke();
+                }
+            }
+        }
+
+        function drawForceVectors(centerX, centerY, totalMass, submergedRatio) {
+            const isOverload = submergedRatio > 0.98;
+
+            // 1. Weight Vector (W)
+            const weightLength = Math.min(85, 25 + (totalMass / 5));
+            drawArrow(ctx, centerX - 30, centerY, centerX - 30, centerY + weightLength, '#ef4444', 3.5, 'W');
+
+            // 2. Buoyant Force Vector (F_A)
+            const buoyLength = isOverload ? weightLength - 18 : weightLength;
+            drawArrow(ctx, centerX + 30, centerY + 5, centerX + 30, centerY + 5 - buoyLength, '#38bdf8', 3.5, 'F_A');
+        }
+
+        function drawArrow(ctx, fromx, fromy, tox, toy, color, width, label) {
+            const headlen = 9;
+            const dx = tox - fromx;
+            const dy = toy - fromy;
+            const angle = Math.atan2(dy, dx);
+
+            ctx.save();
+            ctx.strokeStyle = color;
+            ctx.fillStyle = color;
+            ctx.lineWidth = width;
+
+            ctx.beginPath();
+            ctx.moveTo(fromx, fromy);
+            ctx.lineTo(tox, toy);
+            ctx.stroke();
+
+            ctx.beginPath();
+            ctx.moveTo(tox, toy);
+            ctx.lineTo(tox - headlen * Math.cos(angle - Math.PI / 6), toy - headlen * Math.sin(angle - Math.PI / 6));
+            ctx.lineTo(tox - headlen * Math.cos(angle + Math.PI / 6), toy - headlen * Math.sin(angle + Math.PI / 6));
+            ctx.closePath();
+            ctx.fill();
+
+            ctx.font = 'bold 12px Plus Jakarta Sans, sans-serif';
+            ctx.fillText(label, tox + (dx === 0 ? 8 : 0), toy + (dy > 0 ? 15 : -10));
+
+            ctx.restore();
+        }
+
+        function drawAnimatedWater(width, height, waterLevel) {
+            ctx.fillStyle = 'rgba(14, 116, 144, 0.55)';
+            ctx.beginPath();
+            ctx.moveTo(0, height);
+            for (let x = 0; x <= width; x += 10) {
+                const y = waterLevel + Math.sin(x * 0.015 + waveOffset) * 5;
+                ctx.lineTo(x, y);
+            }
+            ctx.lineTo(width, height);
+            ctx.closePath();
+            ctx.fill();
+
+            ctx.fillStyle = 'rgba(3, 105, 161, 0.75)';
+            ctx.beginPath();
+            ctx.moveTo(0, height);
+            for (let x = 0; x <= width; x += 10) {
+                const y = waterLevel + Math.cos(x * 0.02 - waveOffset) * 6 + 3;
+                ctx.lineTo(x, y);
+            }
+            ctx.lineTo(width, height);
+            ctx.closePath();
+            ctx.fill();
+        }
+    </script>
+</body>
+</html>
